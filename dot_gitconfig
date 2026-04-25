@@ -12,7 +12,5 @@
 	editor = nvim
 [rerere]
 	enabled = false
-[coderabbit]
-	machineId = cli/30070fce3b884cd7af9b166a3898bdc6
 [fetch]
 	prune = true

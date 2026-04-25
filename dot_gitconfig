@@ -1,0 +1,18 @@
+[user]
+	name = Hojae Lee
+	email = hlee@thousandbrains.org
+[push]
+	autoSetupRemote = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[core]
+	editor = nvim
+[rerere]
+	enabled = false
+[coderabbit]
+	machineId = cli/30070fce3b884cd7af9b166a3898bdc6
+[fetch]
+	prune = true

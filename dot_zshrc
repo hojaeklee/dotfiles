@@ -77,8 +77,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf fzf-tab zsh-autosuggestions zsh-syntax-highlighting)
-
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=git
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -135,8 +135,6 @@ _uv_run_mod() {
 }
 compdef _uv_run_mod uv
 
-alias ls='ls -alt --color=auto'
-alias gc='pre-commit run --all-files && git add . && git commit'
 export MONTY_DATA=/Users/hlee/tbp/data
 export MONTY_LOGS=/Users/hlee/tbp/results/monty
 export MONTY_MODELS=/Users/hlee/tbp/results/monty/pretrained_models
@@ -148,72 +146,23 @@ export MONTY_MODELS=/Users/hlee/tbp/results/monty/pretrained_models
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude="/Users/hlee/.claude/local/claude"
-
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-
-export EDITOR=nvim
-# enable vi key bindings
-bindkey -v
-# (same as)
-set -o vi
-
-# Use terminfo when available (portable)
-if [[ -n ${terminfo[kcbt]} ]]; then
-  bindkey -M viins "${terminfo[kcbt]}" autosuggest-accept
-  bindkey -M vicmd "${terminfo[kcbt]}" autosuggest-accept
-else
-  # Fallback: common Shift-Tab sequence
-  bindkey -M viins '^[[Z' autosuggest-accept
-  bindkey -M vicmd '^[[Z' autosuggest-accept
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Use Neovim for man pages
 export MANPAGER="nvim +Man!"
 
-# ============================================
-# CLAUDE CODE TAMAGOTCHI - FEEDBACK SYSTEM
-# ============================================
+# My Aliases
+alias python=python3
+alias vim=nvim
+alias claude_settings="cursor ~/.claude"
+alias obsidian="cd '/Users/hlee/Library/CloudStorage/GoogleDrive-hojae.k.lee@gmail.com/My Drive/knowledge-base'"
+bindkey '^[[Z' autosuggest-accept
+alias pycharm="/Applications/PyCharm.app/Contents/MacOS/pycharm"
 
-# Core Feature Enable (REQUIRED)
-export PET_FEEDBACK_ENABLED=true
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
-# Groq API Configuration (REQUIRED)
-export PET_GROQ_API_KEY="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"  # Get from https://console.groq.com/keys
-export PET_GROQ_MODEL="openai/gpt-oss-20b"  # Best for quality. Alt: llama-3.1-8b-instant for speed
-export PET_GROQ_TIMEOUT=3000
-export PET_GROQ_MAX_RETRIES=2
+alias claude-mem='bun "/Users/hlee/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
 
-# Processing Configuration (OPTIONAL - these are good defaults)
-export PET_FEEDBACK_CHECK_INTERVAL=5        # Check every 5 statusline updates
-export PET_FEEDBACK_BATCH_SIZE=10          # Process 10 messages at once
-export PET_FEEDBACK_MIN_MESSAGES=3         # Min messages before analysis
-export PET_FEEDBACK_MODE=full              # full|passive|off
 
-# Mood Thresholds (OPTIONAL - customize pet reactions)
-export PET_ANNOYED_THRESHOLD=3             # Issues before annoyed
-export PET_ANGRY_THRESHOLD=5               # Issues before angry  
-export PET_FURIOUS_THRESHOLD=8             # Issues before furious
-export PET_MOOD_DECAY_RATE=10              # How fast mood improves
-export PET_PRAISE_BOOST=10                 # Happiness boost for good behavior
-
-# Debug & Logging (OPTIONAL but recommended for monitoring)
-export PET_FEEDBACK_DEBUG=true                           # Enable debug logs
-export PET_FEEDBACK_LOG_DIR="$HOME/.claude/pets/logs"    # Log directory
-export DEBUG_MODE=false                                  # Set to true for console output
-
-# Display Options (OPTIONAL)
-export PET_FEEDBACK_ICON_STYLE=emoji       # emoji|ascii|minimal
-export PET_SHOW_COMPLIANCE_SCORE=false     # Show Claude's score in statusline
-export PET_FEEDBACK_REMARK_LENGTH=50       # Max remark length
-
-# Database (OPTIONAL - default is fine)
-export PET_FEEDBACK_DB_PATH="$HOME/.claude/pets/feedback.db"
-export PET_FEEDBACK_DB_MAX_SIZE=50         # Max DB size in MB
-export PATH="/opt/homebrew/opt/python@3.13/libexec/bin:$PATH"
-
-# Created by `pipx` on 2025-09-20 21:49:57
-export PATH="$PATH:/Users/hlee/.local/bin"
+export PATH="/Library/TeX/texbin:$PATH"

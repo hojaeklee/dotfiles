@@ -1,7 +1,11 @@
 # ---- Oh My Zsh -------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
 # Completion dirs go on fpath BEFORE OMZ, so its compinit picks them up.
+{{- if eq .chezmoi.os "darwin" }}
 fpath+=(/opt/homebrew/share/zsh/site-functions ~/.zfunc)
+{{- else }}
+fpath+=(~/.zsh/pure ~/.zfunc)   # pure prompt is cloned here by .chezmoiexternal
+{{- end }}
 
 ZSH_THEME=""                        # Pure is loaded below instead
 CASE_SENSITIVE="true"
@@ -16,6 +20,7 @@ prompt pure
 
 # ---- Tools -----------------------------------------------------------------
 eval "$(zoxide init zsh --cmd cd)"
+{{- if eq .chezmoi.os "darwin" }}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -31,16 +36,19 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+{{- end }}
 
 # ---- Personal config (~/.config/zsh) ---------------------------------------
 # Sourced after conda so PATH additions take precedence.
 for f in ~/.config/zsh/{path,env,aliases,functions,completions,keybindings,secrets}.zsh(N); do
   source "$f"
 done
+{{- if eq .chezmoi.os "darwin" }}
 
 # >>> open-knowledge cli >>>
 # ! Contents within this block are managed by OpenKnowledge. Do not edit.
 # ! Delete this whole block to opt out — OpenKnowledge will not re-add it.
 [ -f "$HOME/.ok/env.sh" ] && . "$HOME/.ok/env.sh"
 # <<< open-knowledge cli <<<
+{{- end }}
 

@@ -1,0 +1,7 @@
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
+#!/bin/sh
+# Installs the CLI tools the dotfiles expect. Re-runs whenever this list changes.
+set -e
+sudo pacman -S --needed --noconfirm \
+  zsh git fzf zoxide eza bat git-delta git-lfs lf neovim tmux
+{{ end -}}

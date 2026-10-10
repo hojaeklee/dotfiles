@@ -1,0 +1,14 @@
+typeset -U path   # drop duplicate PATH entries
+
+path=(
+  $HOME/.local/bin
+{{- if eq .chezmoi.os "darwin" }}
+  /Library/TeX/texbin   # likely already added via /etc/paths.d/TeX; harmless either way
+{{- end }}
+  $path
+)
+{{- if eq .chezmoi.os "darwin" }}
+
+# Obsidian CLI (moved from ~/.zprofile)
+path+=(/Applications/Obsidian.app/Contents/MacOS)
+{{- end }}

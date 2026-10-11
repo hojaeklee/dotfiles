@@ -2,3 +2,4 @@ README.md
 .config/nvim/.git
 .config/nvim/.git/**
 **/.DS_Store
+.config/nvim/lazy-lock.json

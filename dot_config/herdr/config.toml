@@ -1,0 +1,17 @@
+onboarding = false
+
+# Prefix stays the default ctrl+b (same as tmux, so don't nest the two).
+# prefix+? lists every active binding.
+[keys]
+# Keep herdr's prefix+v, plus tmux-style prefix+| for side-by-side splits
+split_vertical = ["prefix+v", "prefix+|"]
+
+[terminal]
+# New splits/tabs open in the focused pane's directory
+new_cwd = "follow"
+
+[ui]
+status_indicators = "symbols"
+
+[ui.toast]
+delivery = "terminal"
